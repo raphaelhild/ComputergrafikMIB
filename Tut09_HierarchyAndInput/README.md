@@ -49,7 +49,7 @@ erstreckt):
             {
                 Components = new List<SceneComponentContainer>
                 {
-                    // TRANSFROM COMPONENT
+                    // TRANSFORM COMPONENT
                     _baseTransform,
 
                     // SHADER EFFECT COMPONENT
@@ -148,7 +148,7 @@ betragen, die langen Kanten sollen zehn Einheiten messen. Die Arme sollen sich j
         // Setup the scene graph
         return new SceneContainer
         {
-            Children = new List<SceneNodeContainer>
+            Children = new List<SceneComponentContainer>
             {
                 // GREY BASE
                 new SceneNodeContainer
@@ -158,11 +158,10 @@ betragen, die langen Kanten sollen zehn Einheiten messen. Die Arme sollen sich j
                         // TRANSFROM COMPONENT
                         _baseTransform,
 
-                        // MATERIAL COMPONENT
-                        new MaterialComponent
+                        // SHADER EFFECT COMPONENT
+                        new ShaderEffectComponent
                         {
-                            Diffuse = new MatChannelContainer { Color = new float3(0.7f, 0.7f, 0.7f) },
-                            Specular = new SpecularChannelContainer { Color = new float3(1, 1, 1), Shininess = 5 }
+                            Effect = SimpleMeshes.MakeShaderEffect(new float3(0.7f, 0.7f, 0.7f), new float3(0.7f, 0.7f, 0.7f), 5)
                         },
 
                         // MESH COMPONENT
@@ -172,13 +171,12 @@ betragen, die langen Kanten sollen zehn Einheiten messen. Die Arme sollen sich j
                 // RED BODY
                 new SceneNodeContainer
                 {
-                    Components = new List<SceneComponentContainer>
+                    Components = new ChildList
                     {
                         _bodyTransform,
-                        new MaterialComponent
+                         new ShaderEffectComponent
                         {
-                            Diffuse = new MatChannelContainer { Color = new float3(1, 0, 0) },
-                            Specular = new SpecularChannelContainer { Color = new float3(1, 1, 1), Shininess = 5 }
+                            Effect = SimpleMeshes.MakeShaderEffect(new float3(1, 0, 0), new float3(0.7f, 0.7f, 0.7f), 5)
                         },
                         SimpleMeshes.CreateCuboid(new float3(2, 10, 2))
                     }
@@ -214,14 +212,13 @@ Somit sollten wir den neu einzufügenden grünen Oberarm nicht als drittes Kind 
         Components = new List<SceneComponentContainer>
         {
             _bodyTransform,
-            new MaterialComponent
+            new ShaderEffectComponent
             {
-                Diffuse = new MatChannelContainer { Color = new float3(1, 0, 0) },
-                Specular = new SpecularChannelContainer { Color = new float3(1, 1, 1), Shininess = 5 }
+                Effect = SimpleMeshes.MakeShaderEffect(new float3(1, 0, 0), new float3(0.7f, 0.7f, 0.7f), 5)
             },
             SimpleMeshes.CreateCuboid(new float3(2, 10, 2))
         },
-        Children = new List<SceneNodeContainer>
+        Children = new ChildList
         {
             // GREEN UPPER ARM
             new SceneNodeContainer
@@ -229,10 +226,9 @@ Somit sollten wir den neu einzufügenden grünen Oberarm nicht als drittes Kind 
                 Components = new List<SceneComponentContainer>
                 {
                     _upperArmTransform,
-                    new MaterialComponent
+                    new ShaderEffectComponent
                     {
-                        Diffuse = new MatChannelContainer { Color = new float3(0, 1, 0) },
-                        Specular = new SpecularChannelContainer { Color = new float3(1, 1, 1), Shininess = 5 }
+                        Effect = SimpleMeshes.MakeShaderEffect(new float3(0, 1, 0), new float3(0.7f, 0.7f, 0.7f), 5)
                     },
                     SimpleMeshes.CreateCuboid(new float3(2, 10, 2))
                 },
@@ -321,7 +317,7 @@ ein, die die eigentliche Geometrie enthält und diese an die richtige (relative)
 >        {
 >            _upperArmTransform,
 >        },
->        Children = new List<SceneNodeContainer>
+>        Children = new ChildList
 >        {
 >            new SceneNodeContainer
 >            {
@@ -333,10 +329,9 @@ ein, die die eigentliche Geometrie enthält und diese an die richtige (relative)
 >                        Scale = new float3(1, 1, 1),
 >                        Translation = new float3(0, 4, 0)
 >                    },
->                    new MaterialComponent
+>                    new ShaderEffectComponent
 >                    {
->                        Diffuse = new MatChannelContainer { Color = new float3(0, 1, 0) },
->                        Specular = new SpecularChannelContainer { Color = new float3(1, 1, 1), Shininess = 5 }
+>                        Effect = SimpleMeshes.MakeShaderEffect(new float3(0, 1, 0), new float3(0.7f, 0.7f, 0.7f), 5)
 >                    },
 >                    SimpleMeshes.CreateCuboid(new float3(2, 10, 2))
 >                }
