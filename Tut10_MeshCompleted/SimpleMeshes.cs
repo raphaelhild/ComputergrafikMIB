@@ -6,7 +6,7 @@ using Fusee.Engine.Core;
 using Fusee.Math.Core;
 using Fusee.Serialization;
 
-namespace Fusee.Tutorial.Core
+namespace FuseeApp
 {
     public static class SimpleMeshes 
     {
@@ -160,16 +160,18 @@ namespace Fusee.Tutorial.Core
             {
                 Diffuse = new MatChannelContainer
                 {
-                    Color = diffuseColor
+                    Color = new float4(diffuseColor, 1)
                 },
                 Specular = new SpecularChannelContainer
                 {
-                    Color = specularColor,
+                    Color = new float4(specularColor, 1),
                     Shininess = shininess
                 }
             };
+
             return ShaderCodeBuilder.MakeShaderEffectFromMatComp(temp);
         }
+
 
         public static Mesh CreateCylinder(float radius, float height, int segments)
         {
@@ -199,11 +201,6 @@ namespace Fusee.Tutorial.Core
                 tris[3*i - 3] = (ushort) (i-1);    // previous segment point
             }
 
-            // Stitch the last segment
-            tris[3 * segments - 1] = (ushort)segments;          // center point
-            tris[3 * segments - 2] = (ushort)0;                 // wrap around
-            tris[3 * segments - 3] = (ushort)(segments - 1);    // last segment point
-
             return new Mesh
             {
                 Vertices = verts,
@@ -221,6 +218,7 @@ namespace Fusee.Tutorial.Core
         {
             throw new NotImplementedException();
         }
+
 
         public static Mesh CreatePyramid(float baselen, float height)
         {
