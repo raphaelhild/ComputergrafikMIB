@@ -16,6 +16,8 @@ namespace FuseeApp
         private SceneRendererForward _sceneRenderer;
         private TransformComponent _baseTransform;
 
+     
+
         SceneContainer CreateScene()
         {
             // Initialize transform components that need to be changed inside "RenderAFrame"
@@ -25,6 +27,7 @@ namespace FuseeApp
                 Scale = new float3(1, 1, 1),
                 Translation = new float3(0, 0, 0)
             };
+
 
             // Setup the scene graph
             return new SceneContainer
@@ -41,11 +44,16 @@ namespace FuseeApp
                             // SHADER EFFECT COMPONENT
                             new ShaderEffectComponent
                             {
-                                Effect = SimpleMeshes.MakeShaderEffect(new float3(0.7f, 0.7f, 0.7f), new float3(1, 1, 1), 5)
+                                Effect = SimpleMeshes.MakeShaderEffect(new float3(255, 255, 244), new float3(1, 1, 1), 5)
                             },
 
                             // MESH COMPONENT
+                            SimpleMeshes.CreateCylinder(5, 10, 8)
+
+                            /*
+                            // MESH COMPONENT
                             SimpleMeshes.CreateCuboid(new float3(10, 10, 10))
+                            */
                         }
                     },
                 }
@@ -56,7 +64,7 @@ namespace FuseeApp
         public override void Init()
         {
             // Set the clear color for the backbuffer to white (100% intentsity in all color channels R, G, B, A).
-            RC.ClearColor = new float4(0.8f, 0.9f, 0.7f, 1);
+            RC.ClearColor = new float4(0.3f, 0.1f, 0.2f, 1);
 
             _scene = CreateScene();
 
