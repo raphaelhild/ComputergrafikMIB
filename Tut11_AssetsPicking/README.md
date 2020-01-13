@@ -15,8 +15,11 @@ die mit Blender erstellt wurden, geladen werden können.
 Hierarchien im bereits bekannten FUSEE-Szenengraphen-Format (bestehend aus Nodes und Komponenten)
 können als `.fus`-Dateien gespeichert und geladen werden. Um mit Blender erstellte 3D-Modelle als .fus-Datei 
 zur Verwendung in FUSEE-Applikationen zu verwenden, muss das FUSEE-Export-AddOn für Blender installiert sein.
-Das sollte bereits als Teil der 
-[Fusee-Installation](http://fusee3d.org/page/install-fusee/) passiert sein. 
+
+Wenn Blender standardmäßig installiert wurde, kann mit dem Befehl `fusee install --blender` das Blender-Add-On 
+an die richtige Stelle kopiert werden. Es muss dann in Blender noch unter Preferences -> Add-Ons in der Liste
+der als als `Testing` markierten Add-Ons per Häkchen aktiviert werden.
+
 
 ### Features des FUSEE-Exporters
 
@@ -32,26 +35,9 @@ als FUSEE-Inhalte exportieren. Diese sind:
     - Flächen aufgeteilt in Dreicecke (`Triangles`)
   - Position, Rotation und Skalierung jeweils relativ zu den Eltern-Einstellungen und 
     zum Koordinaten-Ursprung (Pivot-Point) als `TransformComponent`.
-  - Farben aus den Blender-Material-Einstellungen für den ***Cycles-Renderer*** als `MaterialComponent`:
-    - ***Entweder***
-      - Diffuse-Farbe aus der Diffuse BSDF Node
-      - Texturen als Input für den Farb-Kanal der Diffuse BSDF Node
-      - Specular-Farbe aus der Glossy BSDF Node
-    - ***Oder***
-      - Ausgewählte Parameter aus der Principled BSDF Node
-
-Der Exporter funktioniert in zwei Betriebsarten: 
-
-- ***Ohne*** die Option "Create FUSEE Web-Application" kann eine 3D-Szene als 
-  .fus-Datei (ggf. mit zugehörigen Texturen im .jpg-Format) exportiert werden. Diese
-  Funktionalität verwenden wir im Folgenden, um 3D-Modelle in unserern eigenen FUSEE-Applikationen
-  einzubinden und mit selbst geschriebener Interaktion zu versehen.
-
-- ***Mit*** der Option "Create FUSEE Web-Application" wird eine kompletter FUSEE-Web-Viewer
-  rund um die 3D-Szene erstellt. Diese Betriebsart eignet sich, um mal schnell das Ergebnis eines
-  FUSEE-Exports zu begutachten oder auch um die erstellte Web-Applikation direkt
-  auf einen Web-Space zu kopieren. Die Funktionalität der Web-Applikation erlaubt das
-  interaktive Drehen und Zoomen des 3D-Modells, enthält aber ansonsten keine weitere Funktionalität.
+  - Farben aus den Blender-Material-Einstellungen für den ***Cycles-Renderer*** als `ShaderEffectComponent`:
+    - Diffuse-Farbe aus der Diffuse BSDF Node
+    - Texturen als Input für den Farb-Kanal der Diffuse BSDF Node
 
 
 ## Modelle als Assets
